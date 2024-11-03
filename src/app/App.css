@@ -1,0 +1,11 @@
+.app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	text-align: center;
+	background-color: rgb(177, 56, 122);
+	font-family: Arial, sans-serif;
+}

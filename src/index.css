@@ -1,13 +1,8 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	height: 100%; /* Полная высота для html и body */
+	margin: 0; /* Убираем стандартные отступы */
+	padding: 0; /* Убираем стандартные отступы */
+	font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+	background-color: #f0f0f0; /* Светлый фон для страницы */
+	color: #333; /* Цвет текста по умолчанию */
 }
