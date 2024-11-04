@@ -3,45 +3,49 @@ import Email from './fields/email/Email';
 import Password from './fields/password/Password';
 import Repeat from './fields/repeat pass/Repeat';
 
-export default function FormUserLayout({
-	email,
-	password,
-	repeatPassw,
+export default function FormUserLayouta({
+	control,
+	sendFormData,
 	errors,
-	onSubmit,
-	onChangeField,
-	showPassword,
-	toggleShowPassword,
+	Controller,
+	handleSubmit,
 	submitButtonRef,
+	watch,
 }) {
 	return (
 		<>
 			<h1>Регистрация</h1>
-			<form className={styles.formUser} onSubmit={onSubmit}>
-				{Object.values(errors).map((err, index) =>
-					err ? (
-						<span key={index} className={styles.errors}>
-							{err}
-						</span>
-					) : null,
+			<form className={styles.formUser} onSubmit={handleSubmit(sendFormData)}>
+				{errors.email && (
+					<span className={styles.errors}>{errors.email.message}</span>
 				)}
-				<Email onChange={onChangeField('email')} value={email} />
-				<Password
-					value={password}
-					onChange={onChangeField('password')}
-					showPassword={showPassword}
-					toggleShowPassword={toggleShowPassword}
+				<Controller
+					name="email"
+					control={control}
+					render={({ field }) => <Email {...field} />}
+				/>
+				{errors.password && (
+					<span className={styles.errors}>{errors.password.message}</span>
+				)}
+				<Controller
+					name="password"
+					control={control}
+					render={({ field }) => <Password {...field} />}
 				/>
 
-				<Repeat onChange={onChangeField('repeatPassw')} value={repeatPassw} />
+				{errors.repeatPassw && (
+					<span className={styles.errors}>{errors.repeatPassw.message}</span>
+				)}
+				<Controller
+					name="repeatPassw"
+					control={control}
+					render={({ field }) => <Repeat {...field} />}
+				/>
 				<button
 					ref={submitButtonRef}
 					className={styles.button}
 					disabled={
-						Object.values(errors).some((err) => err) ||
-						email === '' ||
-						password === '' ||
-						repeatPassw === ''
+						!watch('email') || !watch('password') || !watch('repeatPassw')
 					}
 					type="submit"
 				>

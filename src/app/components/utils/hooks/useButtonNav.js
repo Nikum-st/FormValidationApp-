@@ -4,9 +4,13 @@ export default function useButtonNav() {
 	const submitButtonRef = useRef(null);
 
 	return {
-		navigation: (email, password, repeatPassw) => {
+		navigation: (getValues) => {
+			const email = getValues('email');
+			const password = getValues('password');
+			const repeatPassw = getValues('repeatPassw');
+
 			if (email && password.length === repeatPassw.length) {
-				return submitButtonRef.current.focus();
+				submitButtonRef.current.focus();
 			}
 		},
 		submitButtonRef,

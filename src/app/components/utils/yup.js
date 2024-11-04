@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const validationSchema = yup.object().shape({
+export const validationSchema = yup.object().shape({
 	email: yup.string().email('Некорректный адрес электронной почты'),
 	password: yup
 		.string()
@@ -10,15 +10,3 @@ const validationSchema = yup.object().shape({
 		),
 	repeatPassw: yup.string().oneOf([yup.ref('password'), null], 'Пароли не совпадают'),
 });
-
-export const validateAndGetErrorMessages = (formData) => {
-	const errors = {};
-	try {
-		validationSchema.validateSync(formData, { abortEarly: false });
-	} catch (validationErrors) {
-		validationErrors.inner.forEach(({ path, message }) => {
-			errors[path] = message;
-		});
-	}
-	return errors;
-};

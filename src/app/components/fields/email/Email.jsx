@@ -1,4 +1,6 @@
-export default function Email({ onChange, value }) {
+import React, { forwardRef } from 'react';
+
+const Email = forwardRef(({ onChange, value }, ref) => {
 	return (
 		<label>
 			Email:
@@ -8,7 +10,10 @@ export default function Email({ onChange, value }) {
 				placeholder="Введите email"
 				value={value}
 				onChange={onChange}
+				ref={ref}
 			/>
 		</label>
 	);
-}
+});
+
+export default Email;

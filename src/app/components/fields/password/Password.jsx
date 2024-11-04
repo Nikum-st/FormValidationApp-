@@ -1,22 +1,19 @@
-import styles from './Password.module.css';
-export default function Password({ onChange, value, showPassword, toggleShowPassword }) {
+import React, { forwardRef } from 'react';
+
+const Password = forwardRef(({ onChange, value }, ref) => {
 	return (
 		<label>
 			Пароль:
 			<input
-				type={showPassword ? 'text' : 'password'}
+				type="password"
 				name="password"
 				placeholder="Придумайте пароль"
 				value={value}
 				onChange={onChange}
+				ref={ref}
 			/>
-			<button
-				className={styles.showPasswordButton}
-				type="button"
-				onClick={toggleShowPassword}
-			>
-				{showPassword ? 'Скрыть' : 'Показать'} пароль
-			</button>
 		</label>
 	);
-}
+});
+
+export default Password;

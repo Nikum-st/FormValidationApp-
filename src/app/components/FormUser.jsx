@@ -1,26 +1,43 @@
-import useShowPassword from './utils/hooks/useShowPassword';
-import useFormHandlers from './utils/hooks/useFormHandlers';
+import React from 'react';
 import useButtonNav from './utils/hooks/useButtonNav';
+import { validationSchema } from './utils/yup';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import FormUserLayout from './FormUserLayout';
 
+const sendFormData = (formData) => {
+	console.log(formData);
+};
+
 export default function FormUser() {
-	const { email, password, repeatPassw, errors, onSubmit, onChangeField } =
-		useFormHandlers();
-	const { toggleShowPassword, showPassword } = useShowPassword();
+	const {
+		control,
+		handleSubmit,
+		getValues,
+		watch,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+			repeatPassw: '',
+		},
+	});
+
 	const { navigation, submitButtonRef } = useButtonNav();
-	navigation(email, password, repeatPassw);
+
+	navigation(getValues);
 
 	return (
 		<FormUserLayout
-			email={email}
-			password={password}
-			repeatPassw={repeatPassw}
-			errors={errors}
+			watch={watch}
 			submitButtonRef={submitButtonRef}
-			toggleShowPassword={toggleShowPassword}
-			showPassword={showPassword}
-			onSubmit={onSubmit}
-			onChangeField={onChangeField}
+			control={control}
+			sendFormData={sendFormData}
+			errors={errors}
+			Controller={Controller}
+			handleSubmit={handleSubmit}
 		/>
 	);
 }
